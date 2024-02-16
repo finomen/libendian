@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.16)
 
 if(NOT DEFINED PROJECT_NAME)
     set(NOT_SUBPROJECT ON)
@@ -14,13 +14,13 @@ project(libendian
 include(CMakeDependentOption)
 cmake_dependent_option(LIBENDIAN_TEST "Build libendian tests tests" ON "NOT_SUBPROJECT" OFF)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(${PROJECT_NAME} INTERFACE  include)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 if (${LIBENDIAN_TEST})
+    enable_testing()
     add_subdirectory(test)
 endif()
-
